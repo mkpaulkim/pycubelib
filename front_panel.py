@@ -76,6 +76,12 @@ class ParamEntry:
                 val = 0
         return val
 
+    def get_list_val(self, typ=int):
+        aa = self.entry.get()
+        bb = aa.split()
+        cc = [typ(b) for b in bb]
+        return cc
+
 
 class ProgressBar:
     def __init__(self, frame=tkw, xyw=(100, 150, 100), label='progress'):
@@ -101,10 +107,13 @@ class ProgressBar:
 if __name__ == '__main__':
 
     btn1 = CmdButton()
-    ent1 = ParamEntry()
+    ent1 = ParamEntry(xyw=(100, 100, 30))
+    aaa = [11, 22, 33, 44, 55]
+    ent1.set_entry(aaa)
+    c = ent1.get_list_val()
+    print(f'c = {c}')
     prog = ProgressBar()
     prog.setval(75)
-    print(f'prog = {prog.getval()}')
 
     tk.mainloop()
 
