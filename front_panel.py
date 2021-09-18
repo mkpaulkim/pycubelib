@@ -16,7 +16,7 @@ tkw = tkwindow(title='aaa')
 
 
 class CmdButton:
-    def __init__(self, frame=tkw, xyw=(100, 10, 3), text='btn', colors=('gray70', 'yellow'), toggle=False):
+    def __init__(self, frame=tkw, xyw=(100, 50, 3), text='btn', colors=('gray70', 'yellow'), toggle=False):
         x, y, w = xyw
         off_color, on_color = colors
         self.button = tk.Button(frame, text=text, bg=off_color, width=w, font=font0)
@@ -49,7 +49,7 @@ class CmdButton:
 
 
 class ParamEntry:
-    def __init__(self, frame=tkw, xyw=(100, 50, 5), val=0, label='entry'):
+    def __init__(self, frame=tkw, xyw=(100, 100, 5), val=0, label='entry'):
         x, y, w = xyw
         self.entry = tk.Entry(frame, font=font0, justify=tk.RIGHT)
         self.entry['width'] = w
@@ -57,7 +57,7 @@ class ParamEntry:
         self.set_entry(val)
         self.lbl = tk.Label(frame, text=label, bg=frame['background'])
         self.lbl.place(x=x, y=y)
-        tkw.update_idletasks()
+        frame.update_idletasks()
         lw = self.lbl.winfo_width()
         self.lbl.place(x=x-lw-2, y=y+3)
 
@@ -78,28 +78,24 @@ class ParamEntry:
 
 
 class ProgressBar:
-    def __init__(self, frame=tkw, xyw=(100, 100, 100), label='progress'):
+    def __init__(self, frame=tkw, xyw=(100, 150, 100), label='progress'):
         import tkinter.ttk as ttk
         x, y, w = xyw
         self.prog = ttk.Progressbar(frame)
         self.prog.place(x=x, y=y)
         self.lbl = tk.Label(frame, text=label, bg=frame['background'])
         self.lbl.place(x=x, y=y)
-        tkw.update_idletasks()
+        frame.update_idletasks()
         lw = self.lbl.winfo_width()
         self.lbl.place(x=x-lw-2, y=y)
 
+    def setval(self, val):
+        self.prog['value'] = val
+        self.prog.update_idletasks()
 
-class SlideBar():
-    def __init__(self, frame=tkw, xyw=(100, 150, 100), label='slider'):
-        x, y, w = xyw
-        self.slider = tk.Scale(frame, orient=tk.HORIZONTAL, length=w, font=font0, bg=frame['background'])
-        self.slider.place(x=x, y=y)
-        self.lbl = tk.Label(frame, text=label, bg=frame['background'])
-        self.lbl.place(x=x, y=y)
-        tkw.update_idletasks()
-        lw = self.lbl.winfo_width()
-        self.lbl.place(x=x-lw-2, y=y+20)
+    def getval(self):
+        val = self.prog['value']
+        return val
 
 
 if __name__ == '__main__':
@@ -107,7 +103,8 @@ if __name__ == '__main__':
     btn1 = CmdButton()
     ent1 = ParamEntry()
     prog = ProgressBar()
-    sld = SlideBar()
+    prog.setval(75)
+    print(f'prog = {prog.getval()}')
 
     tk.mainloop()
 
