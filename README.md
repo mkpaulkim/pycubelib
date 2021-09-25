@@ -29,7 +29,6 @@
 - write / read .txt
 - write / read .png
 - write / read .jpg
-- path_parts
 
 
 
@@ -49,9 +48,12 @@
 ## general functions
 
 - runstamp
+- path_parts
+
+- what_is
+
 - find_param
 - find_param_list
-- what_is
 
 
 

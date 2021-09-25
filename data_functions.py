@@ -1,4 +1,10 @@
 import numpy as np
+import general_functions as gf
+
+
+class Data2D(np.ndarray):
+    def __init__(self, aaa):
+        super().__init__(aaa)
 
 
 def renormalize(aa, alimit, blimit, btype=None):
@@ -19,6 +25,17 @@ def renormalize(aa, alimit, blimit, btype=None):
 
     return bb
 
+
+def get_roi(aa, roi):
+    rx0, ry0, rx, ry = roi
+    return aa
+
+
+if __name__ == '__main__':
+
+    aa = Data2D(range(10))
+    print(f'aa = {aa}')
+    gf.what_is('aa', aa)
 
 
 
